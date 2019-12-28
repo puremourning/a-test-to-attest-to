@@ -17,7 +17,7 @@ let save_cpo = &cpo
 "*******************************************************************************
 
 " The code is taken directly from the example in the Vim documentation
-function! s:FindStart()
+function! s:FindStart() abort
   " locate the start of the word
   let line = getline('.')
   let start = col('.') - 1
@@ -28,7 +28,7 @@ function! s:FindStart()
 endfunction
 
 " The code is taken directly from the example in the Vim documentation
-function! s:CompleteMonth( base )
+function! s:CompleteMonth( base ) abort
   " find months matching with "a:base"
   let res = []
   for m in split("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec")
@@ -45,14 +45,14 @@ endfunction
 " Simple completion {{{
 "*******************************************************************************
 
-  " See :help complete-functions
-  function! atest#CompleteSimple( findstart, base ) abort
-    if a:findstart
-      return s:FindStart()
-    else
-      return s:CompleteMonth( a:base )
-    endif
-  endfunction
+" See :help complete-functions
+function! atest#CompleteSimple( findstart, base ) abort
+  if a:findstart
+    return s:FindStart()
+  else
+    return s:CompleteMonth( a:base )
+  endif
+endfunction
 
 " }}}
 
@@ -72,7 +72,7 @@ function s:KillTimer() abort
 endfunction
 
 function! s:DoAsyncCompletion( id ) abort
-  call complete( s:FindStart() + 1, s:CompleteMonth( s:complete_base ) )
+  call complete( col( '.' ), s:CompleteMonth( s:complete_base ) )
 endfunction
 
 " See :help complete-functions

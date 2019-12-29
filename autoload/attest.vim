@@ -1,7 +1,7 @@
 "*******************************************************************************
 " Standard boilerplate {{{
 "*******************************************************************************
-if exists( "g:loaded_atest" )
+if exists( "g:loaded_attest" )
   finish
 endif
 
@@ -46,7 +46,7 @@ endfunction
 "*******************************************************************************
 
 " See :help complete-functions
-function! atest#CompleteSimple( findstart, base ) abort
+function! attest#CompleteSimple( findstart, base ) abort
   if a:findstart
     return s:FindStart()
   else
@@ -76,7 +76,7 @@ function! s:DoAsyncCompletion( id ) abort
 endfunction
 
 " See :help complete-functions
-function! atest#CompleteAsync( findstart, base ) abort
+function! attest#CompleteAsync( findstart, base ) abort
   if a:findstart
     " We will work out the start position later
     return s:FindStart()

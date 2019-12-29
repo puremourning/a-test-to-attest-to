@@ -1,4 +1,3 @@
 let &rtp .= ',' .expand( "<sfile>:p:h:h:h" )
-set completefunc=atest#CompleteSimple
+set completefunc=attest#CompleteSimple
 set shortmess+=c
-set completeopt+=noselect

@@ -61,7 +61,6 @@ endfunction
 "*******************************************************************************
 
 let s:complete_timer = -1
-let s:complete_base = v:none
 
 function s:KillTimer() abort
   call timer_stop( s:complete_timer )
@@ -71,8 +70,8 @@ function s:KillTimer() abort
   augroup END
 endfunction
 
-function! s:DoAsyncCompletion( id ) abort
-  call complete( col( '.' ), s:CompleteMonth( s:complete_base ) )
+function! s:DoAsyncCompletion( start_col, base, id ) abort
+  call complete( a:start_col, s:CompleteMonth( a:base ) )
 endfunction
 
 " See :help complete-functions
@@ -90,9 +89,11 @@ function! attest#CompleteAsync( findstart, base ) abort
     au InsertLeave * ++once call <SID>KillTimer()
   augroup END
 
-  " Do something complicated that takes time.
-  let s:complete_base = a:base
-  let s:complete_timer =  timer_start( 200, function( "s:DoAsyncCompletion" ) )
+  " Do something complicated that takes time. Pass the current column (actually
+  " the start column) and the 'query' (a:base) to the callback using a partial.
+  let s:complete_timer =  timer_start( 200,
+                                     \ function( "s:DoAsyncCompletion",
+                                               \ [ col( '.' ), a:base ] ) )
 
   return v:none
 endfunction

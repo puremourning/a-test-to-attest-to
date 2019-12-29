@@ -1,5 +1,5 @@
 function SetUp()
-  let init_script = g:test_path . '/../support/' . g:test_name
+  let init_script = g:test_path . '/../support/test_simple.vim'
   execute 'source ' . init_script
 endfunction
 

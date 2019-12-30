@@ -9,7 +9,8 @@ if !has( 'timers' )
   finish
 endif
 
-let save_cpo = &cpo
+let s:save_cpo = &cpo
+set cpo&vim
 " }}}
 
 "*******************************************************************************
@@ -103,7 +104,7 @@ endfunction
 "*******************************************************************************
 " Standard boilerplate {{{
 "*******************************************************************************
-let &cpo = save_cpo
+let &cpo = s:save_cpo
 " }}}
 
 " Vim: foldmethod=marker

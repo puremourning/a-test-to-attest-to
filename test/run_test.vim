@@ -7,10 +7,10 @@ source %
 %bwipe!
 
 " Extract the list of functions matching ^Test_
-redir @q
-  silent function /^Test_
-redir END
-let s:tests = split(substitute(@q, 'function \(\k*()\)', '\1', 'g'))
+let s:tests = split( substitute( execute( 'function /^Test_' ),
+                               \ 'function \(\k*()\)',
+                               \ '\1',
+                               \ 'g' ) )
 
 " Save all errors
 let s:errors = []

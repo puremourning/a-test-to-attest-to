@@ -16,7 +16,13 @@ let s:tests = split( substitute( execute( 'function /^Test_' ),
 let s:errors = []
 
 function! s:EarlyExit()
-  call add( v:errors, "Test caused Vim to quit!" )
+  call add( v:errors,
+          \ "Test "
+          \ . g:test_name
+          \ . ":"
+          \ . g:test_function
+          \ . " caused Vim to quit!" )
+  call s:EndTest()
   call s:Done()
 endfunction
 
@@ -51,6 +57,7 @@ endif
 
 " ... run all of the Test_* functions
 for test_function in s:tests
+  let g:test_function = test_function
   au VimLeavePre * call s:EarlyExit()
   try
     execute 'call ' test_function

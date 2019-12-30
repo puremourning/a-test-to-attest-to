@@ -79,3 +79,7 @@ function Test_Async_March()
   delfunc! CheckPopupContents
   %bwipe!
 endfunction
+
+" function! Test_Exit()
+"   qa!
+" endfunction
